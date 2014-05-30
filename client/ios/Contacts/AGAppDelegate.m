@@ -45,27 +45,8 @@
 }
 
 // Callback called after receiving push notification
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-        fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-   
-    // ensure the user has logged in
-    UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
-    id topViewController = navigationController.topViewController;
-
-     // are we logged in ?
-    if ([topViewController isKindOfClass:[AGContactsViewController class]]) {
-        
-        // if the user clicked the notification, we know that the Contact
-        // has already been fetched so we just ask the controller to
-        // display the details screen for this Contact.
-        if (application.applicationState == UIApplicationStateInactive) {
-            [(AGContactsViewController *)topViewController displayDetailsForContactWithId:
-                                                            [NSNumber numberWithInteger:[userInfo[@"id"] integerValue]]];
-        } else { // fetch it
-            // attempt to fetch new contact
-            [(AGContactsViewController *)topViewController performFetchWithUserInfo:userInfo completionHandler:completionHandler];
-        }
-    }
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog (@"message received: %@", userInfo[@"aps"][@"alert"]);
 }
 
 @end
