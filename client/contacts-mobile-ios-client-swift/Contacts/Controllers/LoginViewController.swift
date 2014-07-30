@@ -47,7 +47,7 @@ class LoginViewController: UITableViewController {
 
                 // initialize "Registration helper" object using the
                 // base URL where the "AeroGear Unified Push Server" is running.
-                let registration = AGDeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>"))
+                let registration = AGDeviceRegistration(serverURL: NSURL(string: "https://ups-aerodemo.rhcloud.com/ag-push"))
                 
                 // perform registration of this device
                 registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
@@ -62,8 +62,8 @@ class LoginViewController: UITableViewController {
                     // both received when performing the variant registration with the server.
                     // See section "Register an iOS Variant" in the guide:
                     // http://aerogear.org/docs/guides/aerogear-push-ios/unified-push-server/
-                    clientInfo.variantID = "<# Variant Id #>"
-                    clientInfo.variantSecret = "<# Variant Secret #>"
+                    clientInfo.variantID = "c30dc4fc-71fc-422b-a039-9b260f43d561"
+                    clientInfo.variantSecret = "bfa1b733-846e-480b-8292-a009f6fc3550"
                     
                     // --optional config--
                     // set some 'useful' hardware information params
