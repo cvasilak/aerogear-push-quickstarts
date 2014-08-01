@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0E9CC1198B799700C9FCFA /* NotificationRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E9CC0198B799700C9FCFA /* NotificationRegister.m */; };
 		6F14A7E919864FD800C48C12 /* AeroGearPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F14A7E219864FAE00C48C12 /* AeroGearPush.framework */; };
 		6F14A7EA19864FD800C48C12 /* AeroGearPush.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F14A7E219864FAE00C48C12 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6F755F3019879B8600069842 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F755F2F19879B8600069842 /* Utils.swift */; };
@@ -81,6 +82,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F0E9CBF198B799700C9FCFA /* Contacts-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Contacts-Bridging-Header.h"; sourceTree = "<group>"; };
+		6F0E9CC0198B799700C9FCFA /* NotificationRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationRegister.m; path = Utils/NotificationRegister.m; sourceTree = "<group>"; };
+		6F0E9CC2198B7B2500C9FCFA /* NotificationRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NotificationRegister.h; path = Utils/NotificationRegister.h; sourceTree = "<group>"; };
 		6F14A7DB19864FAE00C48C12 /* AeroGearPush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AeroGearPush.xcodeproj; path = "aerogear-push-ios-registration/AeroGearPush.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		6F755F2F19879B8600069842 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 		6F8E6A2D19853C120087C35B /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactDetailsViewController.swift; path = Controllers/ContactDetailsViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +143,9 @@
 				6F8E6A3019853DD70087C35B /* Validation */,
 				6F755F2F19879B8600069842 /* Utils.swift */,
 				6F8E6A3119853DEA0087C35B /* ValidationTextfield.swift */,
+				6F0E9CC2198B7B2500C9FCFA /* NotificationRegister.h */,
+				6F0E9CC0198B799700C9FCFA /* NotificationRegister.m */,
+				6F0E9CBF198B799700C9FCFA /* Contacts-Bridging-Header.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -293,6 +300,7 @@
 				TargetAttributes = {
 					6FB96D091980D802001018FA = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 4DPNWUE2RS;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -383,6 +391,7 @@
 				6F8E6A3719853DF10087C35B /* BirthdateValidationStrategy.swift in Sources */,
 				6FB96D101980D802001018FA /* AppDelegate.swift in Sources */,
 				6F8E6A3919853DF10087C35B /* NameValidationStrategy.swift in Sources */,
+				6F0E9CC1198B799700C9FCFA /* NotificationRegister.m in Sources */,
 				6FF740741983825F002F003A /* ContactsViewController.swift in Sources */,
 				6FF19A751981678400BEDF44 /* ContactsNetworker.swift in Sources */,
 			);
@@ -462,9 +471,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "6FFAA1E4-0B5E-4F90-A6B1-12F939479BEE";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -498,8 +508,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "6FFAA1E4-0B5E-4F90-A6B1-12F939479BEE";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -510,12 +521,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Contacts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Contacts/Contacts-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -524,12 +539,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Contacts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Contacts/Contacts-Bridging-Header.h";
 			};
 			name = Release;
 		};
