@@ -27,7 +27,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jvd-xC-5JL">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="maria" placeholder="Enter your username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jvd-xC-5JL">
                                                     <rect key="frame" x="86" y="7" width="225" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -47,7 +47,7 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GpJ-UV-jxc">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="maria" placeholder="Enter your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GpJ-UV-jxc">
                                                     <rect key="frame" x="85" y="7" width="225" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -96,6 +96,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for a Contact" id="V9p-x9-SXu">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="cNq-gc-VDh" id="kmx-20-6m9"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Cfc-HO-FRN" detailTextLabel="3js-yp-WBM" style="IBUITableViewCellStyleSubtitle" id="cjQ-Hu-0yh">
                                 <rect key="frame" x="0.0" y="163" width="320" height="44"/>
@@ -157,8 +165,20 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="8k3-Mg-Ria" id="rl0-90-lAS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYC-dl-UZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="8k3-Mg-Ria">
+                    <connections>
+                        <outlet property="delegate" destination="cNq-gc-VDh" id="DsM-2X-WT9"/>
+                        <outlet property="searchBar" destination="V9p-x9-SXu" id="ZVB-eV-suY"/>
+                        <outlet property="searchContentsController" destination="cNq-gc-VDh" id="9Tw-xL-v3a"/>
+                        <outlet property="searchResultsDataSource" destination="cNq-gc-VDh" id="z3o-yH-61t"/>
+                        <outlet property="searchResultsDelegate" destination="cNq-gc-VDh" id="04r-oz-lac"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="964" y="-525"/>
         </scene>
