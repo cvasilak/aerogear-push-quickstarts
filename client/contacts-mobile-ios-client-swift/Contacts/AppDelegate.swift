@@ -24,10 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // register with APNS
-        let settings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
 
+        // Bridge to obj-c to avoid runtime exception of missing symbols when calling new API
+        // not available in earlier versions from Swift.
+        NotificationRegister.registerForRemoteNofications(application)
+        
         return true
     }
 
@@ -38,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication!, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]!, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
-        
+
         // ensure the user has logged in
         let rootVC = self.window?.rootViewController
         let topViewController = (rootVC as UINavigationController).topViewController
