@@ -39,6 +39,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // setup a UIDatePicker when clicked on the date field
+    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    [datePicker addTarget:self action:@selector(updateDateTextField:) forControlEvents:UIControlEventValueChanged];
+
+    [self.birthdateTxtField setInputView:datePicker];
+
     // if set, edit existing one
     if (self.contact) {
         self.firstnameTxtField.text = self.contact.firstname;
@@ -46,11 +53,11 @@
         self.phoneTxtField.text = self.contact.phoneNumber;
         self.emailTxtField.text = self.contact.email;
         self.birthdateTxtField.text = self.contact.birthdate;
+        [datePicker setDate:[self dateFromString:self.birthdateTxtField.text]];
     }
     
     self.textfields = @[self.firstnameTxtField, self.lastnameTxtField, self.phoneTxtField, self.emailTxtField, self.birthdateTxtField];
 }
-
 
 #pragma mark - Action methods
 
@@ -88,6 +95,29 @@
     
     // call delegate to add it
     [self.delegate contactDetailsViewController:self didSave:contact];
+}
+
+// Called when user chooses a new date from date picket to adjust to the correct format
+- (void)updateDateTextField:(id)sender {
+    UIDatePicker *picker = (UIDatePicker*)self.birthdateTxtField.inputView;
+    
+    self.birthdateTxtField.text = [self stringFromDate:picker.date];
+}
+
+#pragma mark - Date utility methods
+
+- (NSDate*)dateFromString:(NSString *) date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+
+    return [dateFormatter dateFromString:date];
+}
+
+- (NSString *)stringFromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 @end
