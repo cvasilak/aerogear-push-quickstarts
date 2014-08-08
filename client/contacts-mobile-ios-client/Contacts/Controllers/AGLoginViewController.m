@@ -25,13 +25,14 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTxtField;
-@property (weak, nonatomic) IBOutlet UIButton *loginBut;
 
 - (IBAction)login:(id)sender;
 
 @end
 
-@implementation AGLoginViewController
+@implementation AGLoginViewController {
+    UIActivityIndicatorView *_activityIndicator;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,10 +56,9 @@
         return;
     }
     
-    // disable login button to avoid repetition
-    // when login is 'in-process..'
-    self.loginBut.enabled = NO;
-
+    // show progress view
+    [self startProgressAnimation];
+    
     // attempt to login to backend
     [[AGContactsNetworker shared] loginWithUsername:username password:password
                                   completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -103,8 +103,7 @@
                 // if we reach here, time to move to the main Contacts view
                 [self performSegueWithIdentifier:@"ContactsViewSegue" sender:self];
                 
-                // re-enable login button
-                self.loginBut.enabled = YES;
+                [self stopProgressAnimation];
                 
             } failure:^(NSError *error) {
                 // An error occurred during registration.
@@ -116,8 +115,7 @@
                 
                 [alert show];
                 
-                // re-enable login button
-                self.loginBut.enabled = YES;
+                [self stopProgressAnimation];
             }];
             
         } else {
@@ -128,10 +126,31 @@
                                                   otherButtonTitles:nil];
             [alert show];
             
-            // re-enable login button
-            self.loginBut.enabled = YES;
+            [self stopProgressAnimation];
         }
     }];
+}
+
+#pragma mark - Utility methods to display progress view
+
+- (void)startProgressAnimation {
+    // setup progress view
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    // assign it to the navigator controller
+    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_activityIndicator];
+    self.navigationItem.rightBarButtonItem = barButton;
+    
+    [_activityIndicator startAnimating];
+}
+
+- (void)stopProgressAnimation {
+    [_activityIndicator stopAnimating];
+
+    // replace with login button upon stop
+    UIBarButtonItem * loginBut = [[UIBarButtonItem alloc]
+                                  initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(login:)];
+    self.navigationItem.rightBarButtonItem = loginBut;
 }
 
 @end
