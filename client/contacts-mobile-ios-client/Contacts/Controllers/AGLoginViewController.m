@@ -25,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTxtField;
+@property (weak, nonatomic) IBOutlet UIButton *loginBut;
 
 - (IBAction)login:(id)sender;
 
@@ -54,6 +55,10 @@
         return;
     }
     
+    // disable login button to avoid repetition
+    // when login is 'in-process..'
+    self.loginBut.enabled = NO;
+
     // attempt to login to backend
     [[AGContactsNetworker shared] loginWithUsername:username password:password
                                   completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -98,6 +103,9 @@
                 // if we reach here, time to move to the main Contacts view
                 [self performSegueWithIdentifier:@"ContactsViewSegue" sender:self];
                 
+                // re-enable login button
+                self.loginBut.enabled = YES;
+                
             } failure:^(NSError *error) {
                 // An error occurred during registration.
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
@@ -108,6 +116,8 @@
                 
                 [alert show];
                 
+                // re-enable login button
+                self.loginBut.enabled = YES;
             }];
             
         } else {
@@ -117,6 +127,9 @@
                                                   cancelButtonTitle:@"Bummer"
                                                   otherButtonTitles:nil];
             [alert show];
+            
+            // re-enable login button
+            self.loginBut.enabled = YES;
         }
     }];
 }
