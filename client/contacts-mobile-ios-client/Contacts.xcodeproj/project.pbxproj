@@ -503,7 +503,7 @@
 				GCC_PREFIX_HEADER = "Contacts/Contacts-Prefix.pch";
 				INFOPLIST_FILE = "Contacts/Contacts-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5F3D4E30-67F3-4EC1-8581-D23257162B0A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -521,7 +521,7 @@
 				GCC_PREFIX_HEADER = "Contacts/Contacts-Prefix.pch";
 				INFOPLIST_FILE = "Contacts/Contacts-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5F3D4E30-67F3-4EC1-8581-D23257162B0A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
