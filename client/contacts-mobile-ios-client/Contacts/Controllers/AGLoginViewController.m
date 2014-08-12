@@ -25,17 +25,25 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTxtField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTxtField;
+@property (nonatomic) IBOutlet UIBarButtonItem *loginButtonBarItem;
+
+@property (nonatomic) UIBarButtonItem *activityIndicatorBarItem;
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)login:(id)sender;
 
 @end
 
-@implementation AGLoginViewController {
-    UIActivityIndicatorView *_activityIndicator;
-}
+@implementation AGLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // setup progress view
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    self.activityIndicatorBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
+
 }
 
 #pragma mark - Action methods
@@ -134,23 +142,17 @@
 #pragma mark - Utility methods to display progress view
 
 - (void)startProgressAnimation {
-    // setup progress view
-    _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    // assign the progress view to the navigator controller
+    self.navigationItem.rightBarButtonItem = self.activityIndicatorBarItem;
     
-    // assign it to the navigator controller
-    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:_activityIndicator];
-    self.navigationItem.rightBarButtonItem = barButton;
-    
-    [_activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
 }
 
 - (void)stopProgressAnimation {
-    [_activityIndicator stopAnimating];
+    [self.activityIndicator stopAnimating];
 
     // replace with login button upon stop
-    UIBarButtonItem * loginBut = [[UIBarButtonItem alloc]
-                                  initWithTitle:@"Login" style:UIBarButtonItemStylePlain target:self action:@selector(login:)];
-    self.navigationItem.rightBarButtonItem = loginBut;
+    self.navigationItem.rightBarButtonItem = self.loginButtonBarItem;
 }
 
 @end

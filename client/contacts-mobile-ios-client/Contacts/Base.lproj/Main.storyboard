@@ -83,6 +83,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginButtonBarItem" destination="iPt-sZ-8NZ" id="W0p-xh-vp2"/>
                         <outlet property="passwordTxtField" destination="GpJ-UV-jxc" id="P92-oe-BvH"/>
                         <outlet property="usernameTxtField" destination="jvd-xC-5JL" id="Bub-bq-LBU"/>
                         <segue destination="cNq-gc-VDh" kind="push" identifier="ContactsViewSegue" id="JyU-1e-zel"/>
