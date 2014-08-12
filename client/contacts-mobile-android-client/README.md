@@ -30,7 +30,7 @@ This project is an Android mobile front-end to the [Contacts](https://github.com
 
 ### Change Push Configuration
 
-In [Contacts.java](./src/org/jboss/aerogear/unifiedpush/quickstart/Constants.java) find and replace ```BASE_URL```,
+In [Constants.java](./src/org/jboss/aerogear/unifiedpush/quickstart/Constants.java) find and replace ```BASE_URL```,
 ```UNIFIED_PUSH_URL```, ```VARIANT_ID```, ```SECRET``` and ```GCM_SENDER_ID```. Please refer to the JavaDocs for a
 description of each of these constants.
 
