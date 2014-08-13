@@ -41,13 +41,11 @@ If you have not yet done so, you must [Configure Maven](../../README.md#configur
 Configure the UnifiedPush Java Sender
 ---------------
 
-1. Open [ContactCreationPushNotifier.java](./src/main/java/org/jboss/quickstarts/wfk/contacts/ContactCreationPushNotifier.java)
-2. Set the ``` SERVER_URL ```, the ``` PUSH_APPLICATION_ID ``` and the ``` MASTER_SECRET ```
+1. Open [quickstarts-config.json](./src/main/resources/META-INF/quickstarts-config.json) configuration file.
+2. Adjust the ``` serverUrl ```,  ``` pushApplicationId ``` and the ``` masterSecret ``` parameters according to your UPS configuration.
 
 ```
-    public static final String SERVER_URL = "<pushServerURL e.g http(s)//host:port/context >";
-    public static final String PUSH_APPLICATION_ID = "<push application id e.g. 1234456-234320>";
-    public static final String MASTER_SECRET = "<master secret e.g. 1234456-234320>";
+    {"serverUrl": "change_me", "pushApplicationId": "change_me", "masterSecret": "change_me"}
 ```
 
 You will need to setup an UnifiedPush Server instance to send Push Notifications and communicate with your backend, more information can be found [here](http://aerogear.org/docs/unifiedpush/)   
