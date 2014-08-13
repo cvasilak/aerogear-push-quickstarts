@@ -21,6 +21,7 @@ import org.jboss.aerogear.unifiedpush.SenderClient;
 import org.jboss.aerogear.unifiedpush.message.MessageResponseCallback;
 import org.jboss.aerogear.unifiedpush.message.UnifiedMessage;
 import org.jboss.quickstarts.wfk.contacts.customer.Contact;
+import org.jboss.quickstarts.wfk.contacts.util.QuickStartConfiguration;
 
 import javax.persistence.PostPersist;
 import java.util.logging.Level;
@@ -33,15 +34,15 @@ import java.util.logging.Logger;
 public class ContactCreationPushNotifier {
     private static final Logger logger = Logger.getLogger(ContactCreationPushNotifier.class.getName());
 
-    public static final String SERVER_URL = "<pushServerURL e.g http(s)//host:port/context >";
-    public static final String PUSH_APPLICATION_ID = "<push application id e.g. 1234456-234320>";
-    public static final String MASTER_SECRET = "<master secret e.g. 1234456-234320>";
+    private final QuickStartConfiguration configuration;
 
     private JavaSender javaSender;
 
     public ContactCreationPushNotifier() {
-        javaSender = new SenderClient.Builder(SERVER_URL).build();
+        this.configuration = new QuickStartConfiguration().read();
+        javaSender = new SenderClient.Builder(this.configuration.getServerUrl()).build();
         System.setProperty("jsse.enableSNIExtension", "false");
+
     }
 
     @PostPersist
@@ -54,8 +55,8 @@ public class ContactCreationPushNotifier {
 
     private void sendMessage(Long id, String message) {
         UnifiedMessage unifiedMessage = new UnifiedMessage.Builder()
-                .pushApplicationId(PUSH_APPLICATION_ID)
-                .masterSecret(MASTER_SECRET)
+                .pushApplicationId(this.configuration.getPushApplicationId())
+                .masterSecret(this.configuration.getMasterSecret())
                 .attribute("id", String.valueOf(id))
                 .alert(message)
                 .sound("default")
