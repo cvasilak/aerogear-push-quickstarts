@@ -16,12 +16,12 @@
  */
 package org.jboss.aerogear.quickstarts.contacts;
 
-import org.jboss.aerogear.unifiedpush.JavaSender;
-import org.jboss.aerogear.unifiedpush.SenderClient;
-import org.jboss.aerogear.unifiedpush.message.MessageResponseCallback;
-import org.jboss.aerogear.unifiedpush.message.UnifiedMessage;
 import org.jboss.aerogear.quickstarts.contacts.customer.Contact;
 import org.jboss.aerogear.quickstarts.contacts.util.QuickStartConfiguration;
+import org.jboss.aerogear.unifiedpush.DefaultPushSender;
+import org.jboss.aerogear.unifiedpush.PushSender;
+import org.jboss.aerogear.unifiedpush.message.MessageResponseCallback;
+import org.jboss.aerogear.unifiedpush.message.UnifiedMessage;
 
 import javax.persistence.PostPersist;
 import java.util.logging.Level;
@@ -36,11 +36,14 @@ public class ContactCreationPushNotifier {
 
     private final QuickStartConfiguration configuration;
 
-    private JavaSender javaSender;
+    private PushSender javaSender;
 
     public ContactCreationPushNotifier() {
         this.configuration = new QuickStartConfiguration().read();
-        javaSender = new SenderClient.Builder(this.configuration.getServerUrl()).build();
+        javaSender = new  DefaultPushSender.Builder(this.configuration.getServerUrl())
+                .pushApplicationId(this.configuration.getPushApplicationId())
+                .masterSecret(this.configuration.getMasterSecret())
+                .build();
         System.setProperty("jsse.enableSNIExtension", "false");
 
     }
@@ -54,13 +57,11 @@ public class ContactCreationPushNotifier {
     }
 
     private void sendMessage(Long id, String message) {
-        UnifiedMessage unifiedMessage = new UnifiedMessage.Builder()
-                .pushApplicationId(this.configuration.getPushApplicationId())
-                .masterSecret(this.configuration.getMasterSecret())
-                .attribute("id", String.valueOf(id))
-                .alert(message)
-                .sound("default")
-                .contentAvailable()
+        UnifiedMessage unifiedMessage = UnifiedMessage.withMessage()
+                    .alert(message)
+                    .sound("default")
+                    .contentAvailable()
+                    .userData("id", String.valueOf(id))
                 .build();
 
         javaSender.send(unifiedMessage, new MessageResponseCallback() {
